@@ -1,14 +1,14 @@
 {
-  "name": "bitstamp",
-  "version": "0.1.5",
-  "description": "Bitstamp REST API wrapper",
+  "name": "bitnz",
+  "version": "0.1.0",
+  "description": "bitNZ API wrapper",
   "keywords": [
-    "bitstamp",
+    "bitnz",
     "btc",
     "bitcoin"
   ],
   "author": {
-    "author": "Mike van Rossum <mike@mvr.me>"
+    "author": "Daniel Newton <djpnewton@gmail.com>"
   },
   "license": "MIT",
   "dependencies": {
@@ -16,15 +16,15 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/askmike/bitstamp"
+    "url": "https://github.com/djpnewton/bitnz_node"
   },
-  "main": "bitstamp.js",
+  "main": "bitnz.js",
   "engines": {
     "node": ">= 0.7"
   },
   "bugs": {
-    "url": "https://github.com/askmike/bitstamp/issues",
-    "email": "mike@mvr.me"
+    "url": "https://github.com/djpnewton/bitnz/issues",
+    "email": "djpnewton@gmail.com"
   },
   "readmeFilename": "README.md"
 }

@@ -1,30 +1,27 @@
-# Bitstamp
+# bitNZ
 
-    npm install bitstamp
+    npm install bitnz
 
-A basic API wrapper for the [Bitstamp REST API](https://www.bitstamp.net/api/). Please refer to [their documentation](https://www.bitstamp.net/api/) for all calls explained. Check out `example.js` for a list of all possible calls and their parameters.
+A basic API wrapper for the [bitNZ API](https://bitnz.com/api). Please refer to [their documentation](https://bitnz.com/api) for all calls explained. Check out `example.js` for a list of all possible calls and their parameters.
 
-    var Bitstamp = require('bitstamp');
-    var bitstamp = new Bitstamp;
+    var BitNZ = require('bitnz');
+    var bitnz = new BitNZ;
 
-    bitstamp.transactions(function(err, trades) {
+    bitnz.trades(function(err, trades) {
       console.log(trades);  
     });
 
 
-## 0.1.0 - Big October 2013 update
-
-The whole private API authentication process looks different now. The result is that you have to provide different information to Bitstamp (generate an API key, provide key, secret and client ID - the last is your Bitstamp user ID). Check out the new examples in `example.js`.
-
 # Final
 
-If this wrapper helped you in any way, you can always leave me a tip at (BTC) 1KyQdQ9ctjCrGjGRCWSBhPKcj5omy4gv5S
+If this wrapper helped you in any way, you can always leave me a tip at (BTC) 1NAVXrA8NnXURzdFNLf79p8YoLPBBfwnFi
 
 # License
 
 The MIT License (MIT)
 
 Copyright (c) 2013 Mike van Rossum mike@mvr.me
+Copyright (c) 2014 Daniel Newton djpnewton@gmail.com
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
 
