@@ -72,6 +72,10 @@ bitNZ.prototype._request = function(method, path, data, callback, args) {
 
 }
 
+bitNZ.prototype._default = function(arg, value) {
+  return typeof arg !== 'undefined' ? arg : value;
+}
+
 bitNZ.prototype._get = function(action, callback, args) {
   args = _.compactObject(args);
   var path = '/api/0/' + action + '?' + querystring.stringify(args);
@@ -109,12 +113,10 @@ bitNZ.prototype.ticker = function(callback) {
   this._get('ticker', callback);
 }
 
-bitNZ.prototype.trades = function(options, callback) {
-  if(!callback) {
-    callback = options;
-    options = undefined;
-  }
-  this._get('trades', callback, options);
+bitNZ.prototype.trades = function(callback, since_date) {
+  var day_ago = Date.now() / 1000 - 24 * 60 * 60;
+  since_date = this._default(since_date, day_ago);
+  this._get('trades', callback, {'since_date': parseInt(since_date)});
 }
 
 bitNZ.prototype.orderbook = function(callback) {
@@ -130,64 +132,48 @@ bitNZ.prototype.balance = function(callback) {
   this._post('balance', callback);
 }
 
-bitNZ.prototype.user_transactions = function(timedelta, callback) {
-  if(!callback) {
-    callback = timedelta;
-    timedelta = undefined;
-  }
-  this._post('user_transactions', callback, {timedelta: timedelta});
+bitNZ.prototype.orders_buy_open = function(callback) {
+  this._post('orders/buy/open', callback);
 }
 
-bitNZ.prototype.open_orders = function(callback) {
-  this._post('open_orders', callback);
+bitNZ.prototype.orders_sell_open = function(callback) {
+  this._post('orders/sell/open', callback);
 }
 
-bitNZ.prototype.cancel_order = function(id, callback) {
-  this._post('cancel_order', callback, {id: id});
+bitNZ.prototype.orders_buy_closed = function(callback, offset, limit) {
+  offset = this._default(offset, 0);
+  limit = this._default(limit, 100);
+  this._post('orders/buy/closed', callback, {'offset': offset, 'limit': limit});
 }
 
-bitNZ.prototype.buy = function(amount, price, callback) {
-  this._post('buy', callback, {amount: amount, price: price});
+bitNZ.prototype.orders_sell_closed = function(callback, offset, limit) {
+  offset = this._default(offset, 0);
+  limit = this._default(limit, 100);
+  this._post('orders/sell/closed', callback, {'offset': offset, 'limit': limit});
 }
 
-bitNZ.prototype.sell = function(amount, price, callback) {
-  this._post('sell', callback, {amount: amount, price: price});
+bitNZ.prototype.orders_buy_cancel= function(callback, id) {
+  this._post('orders/buy/cancel', callback, {'id': id});
 }
 
-bitNZ.prototype.withdrawal_requests = function(callback) {
-  this._post('withdrawal_requests', callback);
+bitNZ.prototype.orders_sell_cancel= function(callback, id) {
+  this._post('orders/sell/cancel', callback, {'id': id});
 }
 
-bitNZ.prototype.bitcoin_withdrawal = function(amount, address, callback) {
-  this._post('bitcoin_withdrawal', callback, {amount: amount, address: address});
+bitNZ.prototype.orders_buy_create = function(callback, amount, price) {
+  this._post('orders/buy/create', callback, {'amount': amount, 'price': price});
 }
 
-bitNZ.prototype.bitcoin_deposit_address = function(callback) {
-  this._post('bitcoin_deposit_address', callback);
+bitNZ.prototype.orders_sell_create = function(callback, amount, price) {
+  this._post('orders/sell/create', callback, {'amount': amount, 'price': price});
 }
 
-bitNZ.prototype.unconfirmed_btc = function(callback) {
-  this._post('unconfirmed_btc', callback);
+bitNZ.prototype.btc_deposit_address = function(callback) {
+  this._post('btc/address', callback);
 }
 
-bitNZ.prototype.ripple_withdrawal = function(amount, address, currency, callback) {
-  this._post('ripple_withdrawal', callback, {amount: amount, address: address, currency: currency});
-}
-
-bitNZ.prototype.ripple_address = function(callback) {
-  this._post('ripple_address', callback);
-}
-
-// These API calls return a 404 as of `Thu Oct 31 13:54:19 CET 2013`
-// even though they are still in the API documentation
-bitNZ.prototype.create_code = function(usd, btc, callback) {
-  this._post('create_code', callback, {usd: usd, btc: btc});
-}
-bitNZ.prototype.check_code = function(code, callback) {
-  this._post('check_code', callback, {code: code});
-}
-bitNZ.prototype.redeem_code = function(code, callback) {
-  this._post('redeem_code', callback, {code: code});
+bitNZ.prototype.btc_withdraw = function(callback, amount, address) {
+  this._post('btc/withdraw', callback, {'amount': amount, 'address': address});
 }
 
 module.exports = bitNZ;
