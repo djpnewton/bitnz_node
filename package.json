@@ -23,7 +23,7 @@
     "node": ">= 0.7"
   },
   "bugs": {
-    "url": "https://github.com/djpnewton/bitnz/issues",
+    "url": "https://github.com/djpnewton/bitnz_node/issues",
     "email": "djpnewton@gmail.com"
   },
   "readmeFilename": "README.md"
